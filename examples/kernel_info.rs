@@ -7,7 +7,7 @@ fn main() {
     env_logger::init();
 
     let files = File::open("/Users/baber/Library/Jupyter/runtime/kernel-7de34064-4eab-43dd-9da1-75fb3a8f9bc7.json").expect("file not found");
-    let client = Client::from_reader(files).expect("creating jupyter connection");
+    let client = Client::existing().expect("creating jupyter connection");
 
 
     let command = Command::KernelInfo;

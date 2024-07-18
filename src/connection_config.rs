@@ -1,7 +1,7 @@
 use crate::errors::Result;
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct ConnectionConfig {
     pub shell_port: u32,
     pub iopub_port: u32,
