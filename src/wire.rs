@@ -13,7 +13,7 @@ type Part = Vec<u8>;
 
 static DELIMITER: &[u8] = b"<IDS|MSG>";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub(crate) struct WireMessage<M: Mac + Debug + Clone> {
     pub(crate) header: Part,
     pub(crate) parent_header: Part,

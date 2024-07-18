@@ -1,13 +1,13 @@
 extern crate env_logger;
 extern crate jupyter_client;
-extern crate structopt;
+// extern crate structopt;
 
 use jupyter_client::commands::Command;
 use jupyter_client::responses::{Response, ShellResponse, Status};
 use jupyter_client::Client;
 use std::collections::HashMap;
 use std::fs::File;
-use structopt::StructOpt;
+// use structopt::StructOpt;
 
 // #[derive(Debug, StructOpt)]
 // struct Opt {
