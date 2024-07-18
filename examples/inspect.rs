@@ -5,11 +5,14 @@ use jupyter_client::commands::{Command, DetailLevel};
 use jupyter_client::responses::{Response, ShellResponse};
 use jupyter_client::Client;
 use std::collections::HashMap;
+use std::fs::File;
 
 fn main() {
     env_logger::init();
 
-    let client = Client::existing().expect("creating jupyter connection");
+    let files = File::open("/Users/baber/Library/Jupyter/runtime/kernel-9afc7afd-9807-48e4-8183-68eaa038e1c9.json").expect("file not found");
+    let client = Client::from_reader(files).expect("creating jupyter connection");
+
 
     // Set up some previous code
     let code = r#"class Foo(object):

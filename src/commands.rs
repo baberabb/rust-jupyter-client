@@ -13,7 +13,7 @@ use crate::wire::WireMessage;
 use hmac::Mac;
 use log::trace;
 use serde::{Serialize as SerdeSerialize, Serializer};
-use serde_derive::Serialize;
+use serde::Serialize;
 use serde_json::json;
 use std::collections::HashMap;
 use std::fmt::Debug;

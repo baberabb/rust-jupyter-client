@@ -1,6 +1,6 @@
 use crate::errors::Result;
-use chrono::Utc;
-use serde_derive::{Deserialize, Serialize};
+use time::OffsetDateTime;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Header {
@@ -18,7 +18,7 @@ impl Header {
         S: Into<String>,
     {
         Header {
-            date: format!("{:?}", Utc::now()),
+            date: format!("{:?}", OffsetDateTime::now_utc()),
             msg_id: msg_id(),
             username: "client".to_string(),
             session: "".to_string(),
@@ -35,7 +35,7 @@ impl Header {
 
 fn msg_id() -> String {
     let u = uuid::Uuid::new_v4();
-    format!("{}", u.to_hyphenated())
+    format!("{}", u.hyphenated())
 }
 
 #[cfg(test)]
@@ -44,6 +44,7 @@ mod tests {
 
     #[test]
     fn test_msg_type() {
+        let t = time::SystemTime::UNIX_EPOCH;
         let header = Header::new("test");
         assert_eq!(header.msg_type, "test");
     }

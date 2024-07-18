@@ -6,23 +6,27 @@ use jupyter_client::commands::Command;
 use jupyter_client::responses::{Response, ShellResponse, Status};
 use jupyter_client::Client;
 use std::collections::HashMap;
+use std::fs::File;
 use structopt::StructOpt;
 
-#[derive(Debug, StructOpt)]
-struct Opt {
-    #[structopt(name = "command", short = "c")]
-    command: String,
-}
+// #[derive(Debug, StructOpt)]
+// struct Opt {
+//     #[structopt(name = "command", short = "c")]
+//     command: String,
+// }
 
 fn main() {
     env_logger::init();
 
-    let args = Opt::from_args();
-
+    // let args = Opt::from_args();
+    // let files = File::open("/Users/baber/Library/Jupyter/runtime/kernel-8bba2dea-da2e-4782-81f6-1f3ce1268cff.json").expect("file not found");
     let client = Client::existing().expect("creating jupyter connection");
 
+
+
     let command = Command::Execute {
-        code: args.command,
+        code: r#"
+print("HELOOOoOOOOOOooOOOOOO")"#.to_string(),
         silent: false,
         store_history: true,
         user_expressions: HashMap::new(),

@@ -8,20 +8,20 @@ pub(crate) struct FakeAuth;
 
 static KEY: &[u8] = b"foobar0000000000000000000000000000000000000000000000000000000000";
 
-impl Mac for FakeAuth {
-    type OutputSize = U64;
-    type KeySize = U64;
-
-    fn new(_keys: &GenericArray<u8, Self::KeySize>) -> Self {
-        FakeAuth {}
-    }
-
-    fn input(&mut self, _data: &[u8]) {}
-    fn reset(&mut self) {}
-    fn result(self) -> MacResult<Self::OutputSize> {
-        MacResult::new(GenericArray::clone_from_slice(KEY))
-    }
-}
+// impl Mac for FakeAuth {
+//     type OutputSize = U64;
+//     type KeySize = U64;
+//
+//     fn new(_keys: &GenericArray<u8, Self::KeySize>) -> Self {
+//         FakeAuth {}
+//     }
+//
+//     fn input(&mut self, _data: &[u8]) {}
+//     fn reset(&mut self) {}
+//     fn result(self) -> MacResult<Self::OutputSize> {
+//         MacResult::new(GenericArray::clone_from_slice(KEY))
+//     }
+// }
 
 impl FakeAuth {
     pub(crate) fn create() -> FakeAuth {

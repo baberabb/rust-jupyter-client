@@ -1,4 +1,4 @@
-use failure::Error;
+use anyhow::Error;
 
 /** Wrapped result type for this crate.
 

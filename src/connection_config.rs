@@ -1,5 +1,5 @@
 use crate::errors::Result;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct ConnectionConfig {

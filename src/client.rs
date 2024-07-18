@@ -4,9 +4,9 @@ use crate::errors::Result;
 use crate::paths::jupyter_runtime_dir;
 use crate::responses::Response;
 use crate::signatures::HmacSha256;
-use failure::format_err;
+use anyhow::format_err;
 use glob::glob;
-use hmac::Mac;
+use hmac::{Hmac, Mac};
 use log::{debug, trace};
 use std::env::current_dir;
 use std::fs;
@@ -16,7 +16,7 @@ use std::sync::mpsc::{self, Receiver};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
-
+use sha2::Sha256;
 use crate::socket::Socket;
 
 fn find_connection_file<S>(glob_pattern: S, paths: Option<Vec<PathBuf>>) -> Option<PathBuf>
@@ -135,7 +135,7 @@ impl Client {
         R: Read,
     {
         let config: ConnectionConfig = ConnectionConfig::from_reader(reader)?;
-        let auth = HmacSha256::new_varkey(config.key.as_bytes())
+        let auth:Hmac<Sha256> = HmacSha256::new_varkey(config.key.as_bytes())
             .map_err(|e| format_err!("Error constructing HMAC: {:?}", e))?;
 
         let ctx = zmq::Context::new();
